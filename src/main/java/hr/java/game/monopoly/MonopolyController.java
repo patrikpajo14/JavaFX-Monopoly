@@ -1,6 +1,7 @@
 package hr.java.game.monopoly;
 
 import hr.java.game.monopoly.model.*;
+import hr.java.game.monopoly.util.DocumentationUtils;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,6 +13,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -283,10 +288,28 @@ public class MonopolyController {
     @FXML
     void next(ActionEvent event) {
         nextButton.setDisable(true);
+        GameState gameState = new GameState();
+        gameState.setGameBoardState(new String[GameState.NUMBER_OF_ROWS * GameState.NUMBER_OF_COLUMNS]);
+
+        for (int i = 0; i < GameState.NUMBER_OF_ROWS * GameState.NUMBER_OF_COLUMNS; i++) {
+            gameState.getGameBoardState()[i] = boardFields[i].getTitle();
+        }
+
+        if(Monopoly.playerTurn.name().equals(PlayerTurn.PLAYER_ONE.name())){
+            gameState.setTurn(player2);
+        }else{
+            gameState.setTurn(player1);
+        }
+
+
         Thread thread = new Thread(){
             public void run(){
                 try {
-                    System.out.println(Monopoly.playerTurn.name() + " pressed Next button");
+                    if (Monopoly.playerTurn.name().equals(PlayerTurn.PLAYER_ONE.name())) {
+                        playerOneSendRequest(gameState);
+                    } else if (Monopoly.playerTurn.name().equals(PlayerTurn.PLAYER_TWO.name())) {
+                        playerTwoSendRequest(gameState);
+                    }
                     Thread.sleep(50);
                     nextButton.setDisable(false);
                     rollButton.setDisable(false);
@@ -299,4 +322,50 @@ public class MonopolyController {
 
         fillInfoLog("Your turn, roll dice!");
     }
+
+    private static void playerOneSendRequest(GameState gameState) {
+        // Closing socket will also close the socket's InputStream and OutputStream.
+        try (Socket clientSocket = new Socket(Monopoly.HOST, Monopoly.PLAYER_TWO_SERVER_PORT)) {
+            System.err.println("Client is connecting to " + clientSocket.getInetAddress() + ":" + clientSocket.getPort());
+
+            //sendPrimitiveRequest(clientSocket);
+            sendSerializableRequestToPlayerTwo(clientSocket, gameState);
+
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void playerTwoSendRequest(GameState gameState) {
+        // Closing socket will also close the socket's InputStream and OutputStream.
+        try (Socket clientSocket = new Socket(Monopoly.HOST, Monopoly.PLAYER_ONE_SERVER_PORT)) {
+            System.err.println("Client is connecting to " + clientSocket.getInetAddress() + ":" + clientSocket.getPort());
+
+            //sendPrimitiveRequest(clientSocket);
+            sendSerializableRequestToPlayerOne(clientSocket, gameState);
+
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void sendSerializableRequestToPlayerTwo(Socket client, GameState gameState) throws IOException, ClassNotFoundException {
+        ObjectOutputStream oos = new ObjectOutputStream(client.getOutputStream());
+        ObjectInputStream ois = new ObjectInputStream(client.getInputStream());
+        oos.writeObject(gameState);
+        System.out.println("Game state sent to Player two!");
+    }
+
+    private static void sendSerializableRequestToPlayerOne(Socket client, GameState gameState) throws IOException, ClassNotFoundException {
+        ObjectOutputStream oos = new ObjectOutputStream(client.getOutputStream());
+        ObjectInputStream ois = new ObjectInputStream(client.getInputStream());
+        oos.writeObject(gameState);
+        System.out.println("Game state sent to Player one!");
+    }
+
+    public void generateHtmlDocumentation() {
+        DocumentationUtils.generateDocumentation();
+        System.out.println("DocumentationUtils");
+    }
+
 }

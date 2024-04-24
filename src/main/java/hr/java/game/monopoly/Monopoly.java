@@ -21,6 +21,8 @@ public class Monopoly extends Application {
     public static final int PLAYER_TWO_SERVER_PORT = 1989;
     public static final int PLAYER_ONE_SERVER_PORT = 1990;
 
+    public static final String HOST = "localhost";
+
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Monopoly.class.getResource("monopoly-view.fxml"));

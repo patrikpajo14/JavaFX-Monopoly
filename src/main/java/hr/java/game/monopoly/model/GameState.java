@@ -1,6 +1,5 @@
 package hr.java.game.monopoly.model;
 
-import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import lombok.AllArgsConstructor;
 import lombok.Data;
