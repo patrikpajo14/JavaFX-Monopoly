@@ -6,6 +6,7 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -15,9 +16,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.TextFlow?>
+<?import javafx.scene.text.Text?>
 
-<VBox alignment="CENTER" prefHeight="583.0" prefWidth="950.0" spacing="20.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21" fx:controller="hr.java.game.monopoly.MonopolyController">
+<VBox alignment="CENTER" prefHeight="583.0" prefWidth="950.0" spacing="20.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hr.java.game.monopoly.MonopolyController">
   <padding>
     <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
   </padding>
@@ -44,25 +45,6 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <MenuBar prefHeight="25.0" prefWidth="712.0" GridPane.columnSpan="7" GridPane.valignment="TOP">
-              <menus>
-                <Menu mnemonicParsing="false" text="File">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="Close" />
-                  </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Edit">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="Delete" />
-                  </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Help">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="About" />
-                  </items>
-                </Menu>
-              </menus>
-            </MenuBar>
             <AnchorPane prefHeight="492.0" prefWidth="524.0" style="-fx-background-color: #ffffff;" GridPane.columnSpan="4" GridPane.rowIndex="1" GridPane.rowSpan="7">
                <children>
                   <GridPane prefHeight="500.0" prefWidth="500.0">
@@ -81,14 +63,7 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
-                           <children>
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f8f8f8" height="100.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
-                              <Label alignment="CENTER" layoutY="30.0" maxWidth="100.0" prefHeight="40.0" prefWidth="100.0" rotate="180.0" text="Mediteranean avenue" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0171bb" height="20.0" layoutY="80.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
-                           </children>
-                        </AnchorPane>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                        <AnchorPane id="anchorPane00" fx:id="anchorPane00" prefHeight="200.0" prefWidth="200.0">
                            <children>
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f8f8f8" height="100.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
                               <Label alignment="CENTER" layoutY="38.0" prefHeight="25.0" prefWidth="100.0" rotate="140.0" text="Start" textAlignment="CENTER">
@@ -96,23 +71,40 @@
                                     <Font name="System Bold" size="14.0" />
                                  </font>
                               </Label>
+                              <Label id="player_one" fx:id="player1Label" layoutX="18.0" layoutY="15.0" style="-fx-background-color: #e61f23; -fx-padding: 3px 5px;" text="P1" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label id="player_one" fx:id="player2Label" layoutX="50.0" layoutY="51.0" style="-fx-background-color: #005999; -fx-padding: 3px 5px;" text="P2" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
                            </children>
                         </AnchorPane>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
+                        <AnchorPane fx:id="anchorPane01" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+                           <children>
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f8f8f8" height="100.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
+                              <Label alignment="CENTER" layoutY="30.0" maxWidth="100.0" prefHeight="40.0" prefWidth="100.0" rotate="180.0" text="Mediteranean avenue" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" />
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0171bb" height="20.0" layoutY="80.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane fx:id="anchorPane02" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
                            <children>
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f8f8f8" height="100.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
                               <Label alignment="CENTER" layoutY="30.0" maxWidth="100.0" prefHeight="40.0" prefWidth="100.0" rotate="180.0" text="Baltic avenue" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" />
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0171bb" height="20.0" layoutY="80.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
                            </children>
                         </AnchorPane>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3">
+                        <AnchorPane fx:id="anchorPane03" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3">
                            <children>
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f8f8f8" height="100.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
                               <Label alignment="CENTER" layoutY="30.0" maxWidth="100.0" prefHeight="40.0" prefWidth="100.0" rotate="180.0" text="Oriental avenue" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" />
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0171bb" height="20.0" layoutY="80.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
                            </children>
                         </AnchorPane>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4">
+                        <AnchorPane fx:id="anchorPane04" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4">
                            <children>
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f8f8f8" height="100.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
                               <Label alignment="CENTER" layoutY="30.0" maxWidth="100.0" prefHeight="40.0" prefWidth="100.0" rotate="230.0" text="Jail" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
@@ -122,28 +114,28 @@
                               </Label>
                            </children>
                         </AnchorPane>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                        <AnchorPane fx:id="anchorPane14" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="1">
                            <children>
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f8f8f8" height="100.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
                               <Label alignment="CENTER" layoutY="30.0" maxWidth="100.0" prefHeight="40.0" prefWidth="100.0" rotate="-90.0" text="Pacific avenue" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" />
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1fb25a" height="20.0" layoutX="-40.0" layoutY="40.0" rotate="90.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
                            </children>
                         </AnchorPane>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="2">
+                        <AnchorPane fx:id="anchorPane24" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="2">
                            <children>
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f8f8f8" height="100.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
                               <Label alignment="CENTER" layoutY="30.0" maxWidth="100.0" prefHeight="40.0" prefWidth="100.0" rotate="-90.0" text="Atlantic avenue" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" />
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1fb25a" height="20.0" layoutX="-40.0" layoutY="40.0" rotate="90.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
                            </children>
                         </AnchorPane>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="3">
+                        <AnchorPane fx:id="anchorPane34" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="3">
                            <children>
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f8f8f8" height="100.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
                               <Label alignment="CENTER" layoutY="30.0" maxWidth="100.0" prefHeight="40.0" prefWidth="100.0" rotate="-90.0" text="Ventnor avenue" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" />
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1fb25a" height="20.0" layoutX="-40.0" layoutY="40.0" rotate="-90.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
                            </children>
                         </AnchorPane>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="4">
+                        <AnchorPane fx:id="anchorPane44" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="4">
                            <children>
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f8f8f8" height="100.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
                               <Label alignment="CENTER" layoutY="30.0" maxWidth="100.0" prefHeight="40.0" prefWidth="100.0" rotate="320.0" text="Free parking" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
@@ -153,28 +145,28 @@
                               </Label>
                            </children>
                         </AnchorPane>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="4">
+                        <AnchorPane fx:id="anchorPane43" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="4">
                            <children>
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f8f8f8" height="100.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
                               <Label alignment="CENTER" layoutY="30.0" maxWidth="100.0" prefHeight="40.0" prefWidth="100.0" text="New York avenue" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" />
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d93a96" height="20.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
                            </children>
                         </AnchorPane>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                        <AnchorPane fx:id="anchorPane41" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                            <children>
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f8f8f8" height="100.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
                               <Label alignment="CENTER" layoutY="30.0" maxWidth="100.0" prefHeight="40.0" prefWidth="100.0" text="Virginia avenue" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" />
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d93a96" height="20.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
                            </children>
                         </AnchorPane>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                        <AnchorPane fx:id="anchorPane42" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="4">
                            <children>
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f8f8f8" height="100.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
                               <Label alignment="CENTER" layoutY="30.0" maxWidth="100.0" prefHeight="40.0" prefWidth="100.0" text="Tennessee avenue" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" />
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d93a96" height="20.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
                            </children>
                         </AnchorPane>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
+                        <AnchorPane fx:id="anchorPane40" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
                            <children>
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f8f8f8" height="100.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
                               <Label alignment="CENTER" layoutY="30.0" maxWidth="100.0" prefHeight="40.0" prefWidth="100.0" rotate="40.0" text="Go to jail" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
@@ -184,21 +176,21 @@
                               </Label>
                            </children>
                         </AnchorPane>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0" rotate="180.0" GridPane.rowIndex="1">
+                        <AnchorPane fx:id="anchorPane10" prefHeight="200.0" prefWidth="200.0" rotate="180.0" GridPane.rowIndex="1">
                            <children>
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f8f8f8" height="100.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
                               <Label alignment="CENTER" layoutY="30.0" maxWidth="100.0" prefHeight="40.0" prefWidth="100.0" rotate="-90.0" text="States avenue" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" />
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f7941d" height="20.0" layoutX="-40.0" layoutY="40.0" rotate="90.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
                            </children>
                         </AnchorPane>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0" rotate="180.0" GridPane.rowIndex="2">
+                        <AnchorPane fx:id="anchorPane20" prefHeight="200.0" prefWidth="200.0" rotate="180.0" GridPane.rowIndex="2">
                            <children>
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f8f8f8" height="100.0" rotate="180.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
                               <Label alignment="CENTER" layoutY="30.0" maxWidth="100.0" prefHeight="40.0" prefWidth="100.0" rotate="-90.0" text="Boardwalk" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" />
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f7941d" height="20.0" layoutX="-40.0" layoutY="40.0" rotate="90.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
                            </children>
                         </AnchorPane>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0" rotate="180.0" GridPane.rowIndex="3">
+                        <AnchorPane fx:id="anchorPane30" prefHeight="200.0" prefWidth="200.0" rotate="180.0" GridPane.rowIndex="3">
                            <children>
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f8f8f8" height="100.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
                               <Label alignment="CENTER" layoutY="30.0" maxWidth="100.0" prefHeight="40.0" prefWidth="100.0" rotate="-90.0" text="Park place" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" />
@@ -225,12 +217,44 @@
                   </GridPane>
                </children>
             </AnchorPane>
-            <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #f8f8f8;" GridPane.columnIndex="5" GridPane.columnSpan="2" GridPane.rowIndex="1" GridPane.rowSpan="7">
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #f8f8f8;" GridPane.columnIndex="5" GridPane.columnSpan="2" GridPane.rowSpan="9">
                <children>
-                  <TextFlow layoutX="69.0" layoutY="32.0" prefHeight="200.0" prefWidth="200.0" />
-                  <Button id="rollButton" fx:id="rollButton" layoutX="66.0" layoutY="289.0" mnemonicParsing="false" onAction="#roll" prefHeight="25.0" prefWidth="200.0" text="Roll dice" />
+                  <Button id="rollButton" fx:id="rollButton" layoutX="52.0" layoutY="376.0" mnemonicParsing="false" onAction="#roll" prefHeight="40.0" prefWidth="232.0" style="-fx-background-color: #ffffff; -fx-border-color: #47abeb;" text="Roll dice" />
+                  <Text id="player_name" fx:id="player_name" layoutX="116.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player name">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Text>
+                  <Button id="rollButton" fx:id="nextButton" layoutX="52.0" layoutY="474.0" mnemonicParsing="false" onAction="#next" prefHeight="40.0" prefWidth="232.0" style="-fx-background-color: #47abeb;" text="Next turn" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
+                  <Button id="rollButton" fx:id="buyButton" layoutX="52.0" layoutY="433.0" mnemonicParsing="false" onAction="#buy" prefHeight="27.0" prefWidth="109.0" style="-fx-background-color: #ffffff; -fx-border-color: #47abeb;" text="Buy" />
+                  <Button id="rollButton" fx:id="payRentButton" layoutX="179.0" layoutY="433.0" mnemonicParsing="false" onAction="#payRent" prefHeight="27.0" prefWidth="105.0" style="-fx-background-color: #ffffff; -fx-border-color: #47abeb;" text="Pay rent" />
+                  <TextArea fx:id="infoLogTextArea" layoutX="52.0" layoutY="260.0" prefHeight="72.0" prefWidth="232.0" wrapText="true" />
+                  <TextArea fx:id="playerInfoTextArea" layoutX="51.0" layoutY="89.0" prefHeight="155.0" prefWidth="232.0" wrapText="true" />
                </children>
             </AnchorPane>
+            <MenuBar prefHeight="25.0" prefWidth="712.0" GridPane.columnSpan="7" GridPane.valignment="TOP">
+              <menus>
+                <Menu mnemonicParsing="false" text="File">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="Close" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Edit">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="Delete" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="About" />
+                  </items>
+                </Menu>
+              </menus>
+            </MenuBar>
          </children>
       </GridPane>
    </children>
