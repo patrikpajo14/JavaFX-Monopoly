@@ -1,5 +1,8 @@
 package hr.java.game.monopoly.thread;
 import hr.java.game.monopoly.Monopoly;
+import hr.java.game.monopoly.MonopolyController;
+import hr.java.game.monopoly.model.GameState;
+import hr.java.game.monopoly.model.PlayerTurn;
 import javafx.application.Platform;
 
 import java.io.IOException;
@@ -31,20 +34,20 @@ public class PlayerOneServerThread implements Runnable {
     private static void processSerializableClient(Socket clientSocket) {
         try (ObjectInputStream ois = new ObjectInputStream(clientSocket.getInputStream());
              ObjectOutputStream oos = new ObjectOutputStream(clientSocket.getOutputStream());){
-//            GameState gameState = (GameState)ois.readObject();
+            GameState gameState = (GameState)ois.readObject();
 
-            /*GameState.convertGameStateWithStringToGameStateWithButtons(
-                    gameState.getGameBoardState(),
-                    MonopolyController.boardState
-            );*/
+            GameState.convertGameStateToGameStateWithFields(
+                    gameState.getGameBoardFields(),
+                    MonopolyController.boardFields
+            );
 
-            /*MonopolyController.playerTurn = gameState.getTurn();
-            MonopolyController.numberOfTurns = gameState.getNumberOfMoves();
-            MonopolyController.deactivateButtons(false);*/
+            Monopoly.playerTurn = gameState.getPlayerTurn();
+            MonopolyController.deactivateButtons(true);
+            MonopolyController.synchronizedMovePlayer(gameState.getPlayerOne(), gameState.getPlayerOnePosition());
 
             System.out.println("Player two received the game state!");
             oos.writeObject("Player two received the game state - confirmation!");
-        } catch (IOException e) {
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }

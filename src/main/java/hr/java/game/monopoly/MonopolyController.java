@@ -17,8 +17,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.Random;
+import java.util.Arrays;
 
 public class MonopolyController {
 
@@ -75,6 +74,7 @@ public class MonopolyController {
     @FXML
     private Button rollButton;
     private Dice dice;
+    private static boolean buttonDisable = false;
     public static AnchorPane[] boardState;
     public static Field[] boardFields;
 
@@ -84,8 +84,8 @@ public class MonopolyController {
     public void initialize() {
         dice = new Dice(diceImage, 1);
         if(player_name != null) player_name.setText(Monopoly.playerTurn.name());
-        player1 = new Player(1, player1Label, PlayerTurn.PLAYER_ONE.name(), 5000);
-        player2 = new Player(2, player2Label, PlayerTurn.PLAYER_TWO.name(), 5000);
+        player1 = new Player(1, PlayerTurn.PLAYER_ONE.name(), 5000);
+        player2 = new Player(2, PlayerTurn.PLAYER_TWO.name(), 5000);
 
         boardState = new AnchorPane[GameState.NUMBER_OF_ROWS * GameState.NUMBER_OF_COLUMNS];
 
@@ -216,6 +216,31 @@ public class MonopolyController {
         fillPlayerInfo(player);
     }
 
+    public static void deactivateButtons(boolean state) {
+        buttonDisable = state;
+    }
+
+    public static void synchronizedMovePlayer(Player player, Integer playerPosition) {
+        System.out.println("synchronizedMovePlayer" + player.getCurrentField() + " - " + playerPosition);
+        Platform.runLater(() -> {
+            for (Node node : boardState[player.getCurrentField()].getChildren()) {
+                if (node instanceof Label) {
+                    Label playerLabel = (Label) node;
+                    if (playerPosition >= boardState.length){
+                        int tmpBr = playerPosition - boardState.length;
+                        boardState[player.getCurrentField()].getChildren().remove(playerLabel);
+                        boardState[tmpBr].getChildren().add(playerLabel);
+                        player.setCurrentField(tmpBr);
+                    }else{
+                        boardState[player.getCurrentField()].getChildren().remove(playerLabel);
+                        boardState[playerPosition].getChildren().add(playerLabel);
+                        player.setCurrentField(playerPosition);
+                    }
+                }
+            }
+        });
+    }
+
     @FXML
     void roll(ActionEvent event) {
 
@@ -289,36 +314,26 @@ public class MonopolyController {
     void next(ActionEvent event) {
         nextButton.setDisable(true);
         GameState gameState = new GameState();
-        gameState.setGameBoardState(new String[GameState.NUMBER_OF_ROWS * GameState.NUMBER_OF_COLUMNS]);
+        gameState.setGameBoardFields(boardFields);
 
-        for (int i = 0; i < GameState.NUMBER_OF_ROWS * GameState.NUMBER_OF_COLUMNS; i++) {
-            gameState.getGameBoardState()[i] = boardFields[i].getTitle();
-        }
 
         if(Monopoly.playerTurn.name().equals(PlayerTurn.PLAYER_ONE.name())){
-            gameState.setTurn(player2);
+            gameState.setPlayerTurn(PlayerTurn.valueOf(player2.getName()));
         }else{
-            gameState.setTurn(player1);
+            gameState.setPlayerTurn(PlayerTurn.valueOf(player1.getName()));
         }
+        gameState.setPlayerOne(player1);
+        gameState.setPlayerTwo(player2);
+        gameState.setPlayerOnePosition(player1.getCurrentField());
+        gameState.setPlayerTwoPosition(player2.getCurrentField());
 
-
-        Thread thread = new Thread(){
-            public void run(){
-                try {
-                    if (Monopoly.playerTurn.name().equals(PlayerTurn.PLAYER_ONE.name())) {
-                        playerOneSendRequest(gameState);
-                    } else if (Monopoly.playerTurn.name().equals(PlayerTurn.PLAYER_TWO.name())) {
-                        playerTwoSendRequest(gameState);
-                    }
-                    Thread.sleep(50);
-                    nextButton.setDisable(false);
-                    rollButton.setDisable(false);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        };
-        thread.start();
+        if (Monopoly.playerTurn.name().equals(PlayerTurn.PLAYER_ONE.name())) {
+            playerOneSendRequest(gameState);
+        } else if (Monopoly.playerTurn.name().equals(PlayerTurn.PLAYER_TWO.name())) {
+            playerTwoSendRequest(gameState);
+        }
+        nextButton.setDisable(false);
+        rollButton.setDisable(false);
 
         fillInfoLog("Your turn, roll dice!");
     }
@@ -353,14 +368,14 @@ public class MonopolyController {
         ObjectOutputStream oos = new ObjectOutputStream(client.getOutputStream());
         ObjectInputStream ois = new ObjectInputStream(client.getInputStream());
         oos.writeObject(gameState);
-        System.out.println("Game state sent to Player two!");
+        System.out.println("Game state sent to Player two! \n" + gameState.toString());
     }
 
     private static void sendSerializableRequestToPlayerOne(Socket client, GameState gameState) throws IOException, ClassNotFoundException {
         ObjectOutputStream oos = new ObjectOutputStream(client.getOutputStream());
         ObjectInputStream ois = new ObjectInputStream(client.getInputStream());
         oos.writeObject(gameState);
-        System.out.println("Game state sent to Player one!");
+        System.out.println("Game state sent to Player one! \n" + gameState.toString());
     }
 
     public void generateHtmlDocumentation() {

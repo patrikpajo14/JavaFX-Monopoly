@@ -4,21 +4,20 @@ import javafx.scene.control.Label;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 @Setter
 @Getter
-public class Player {
+public class Player implements Serializable {
     private int id;
-    private Label playerFigure;
     private String name;
     private int wallet;
     private int currentField = 0;
     private ArrayList<Field> fieldsOwns = new ArrayList<>();
 
-    public Player(int id, Label playerFigure, String name, int wallet) {
+    public Player(int id, String name, int wallet) {
         this.id = id;
-        this.playerFigure = playerFigure;
         this.name = name;
         this.wallet = wallet;
     }
