@@ -66,7 +66,7 @@
                         <AnchorPane id="anchorPane00" fx:id="anchorPane00" prefHeight="200.0" prefWidth="200.0">
                            <children>
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f8f8f8" height="100.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
-                              <Label alignment="CENTER" layoutY="38.0" prefHeight="25.0" prefWidth="100.0" rotate="140.0" text="Start" textAlignment="CENTER">
+                              <Label id="field_name" alignment="CENTER" layoutY="38.0" prefHeight="25.0" prefWidth="100.0" rotate="140.0" text="Start" textAlignment="CENTER">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
                                  </font>
@@ -86,7 +86,7 @@
                         <AnchorPane fx:id="anchorPane01" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                            <children>
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f8f8f8" height="100.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
-                              <Label alignment="CENTER" layoutY="30.0" maxWidth="100.0" prefHeight="40.0" prefWidth="100.0" rotate="180.0" text="Mediteranean avenue" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" />
+                              <Label id="field_name" alignment="CENTER" layoutY="30.0" maxWidth="100.0" prefHeight="40.0" prefWidth="100.0" rotate="180.0" text="Mediteranean avenue" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" />
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0171bb" height="20.0" layoutY="80.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
                               <Label id="PLAYER_ONE" fx:id="player1Label1" layoutX="14.0" layoutY="13.0" style="-fx-background-color: #e61f23; -fx-padding: 3px 5px;" text="P1" textFill="WHITE" visible="false">
                                  <font>
@@ -103,7 +103,7 @@
                         <AnchorPane fx:id="anchorPane02" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
                            <children>
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f8f8f8" height="100.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
-                              <Label alignment="CENTER" layoutY="30.0" maxWidth="100.0" prefHeight="40.0" prefWidth="100.0" rotate="180.0" text="Baltic avenue" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" />
+                              <Label id="field_name" alignment="CENTER" layoutY="30.0" maxWidth="100.0" prefHeight="40.0" prefWidth="100.0" rotate="180.0" text="Baltic avenue" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" />
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0171bb" height="20.0" layoutY="80.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
                               <Label id="PLAYER_ONE" fx:id="player1Label11" layoutX="14.0" layoutY="13.0" style="-fx-background-color: #e61f23; -fx-padding: 3px 5px;" text="P1" textFill="WHITE" visible="false">
                                  <font>
@@ -120,7 +120,7 @@
                         <AnchorPane fx:id="anchorPane03" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3">
                            <children>
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f8f8f8" height="100.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
-                              <Label alignment="CENTER" layoutY="30.0" maxWidth="100.0" prefHeight="40.0" prefWidth="100.0" rotate="180.0" text="Oriental avenue" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" />
+                              <Label id="field_name" alignment="CENTER" layoutY="30.0" maxWidth="100.0" prefHeight="40.0" prefWidth="100.0" rotate="180.0" text="Oriental avenue" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" />
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0171bb" height="20.0" layoutY="80.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
                               <Label id="PLAYER_ONE" fx:id="player1Label111" layoutX="14.0" layoutY="13.0" style="-fx-background-color: #e61f23; -fx-padding: 3px 5px;" text="P1" textFill="WHITE" visible="false">
                                  <font>
@@ -137,7 +137,7 @@
                         <AnchorPane fx:id="anchorPane04" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4">
                            <children>
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f8f8f8" height="100.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
-                              <Label alignment="CENTER" layoutY="30.0" maxWidth="100.0" prefHeight="40.0" prefWidth="100.0" rotate="230.0" text="Jail" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
+                              <Label id="field_name" alignment="CENTER" layoutY="30.0" maxWidth="100.0" prefHeight="40.0" prefWidth="100.0" rotate="230.0" text="Jail" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
                                  </font>
@@ -157,7 +157,7 @@
                         <AnchorPane fx:id="anchorPane14" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="1">
                            <children>
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f8f8f8" height="100.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
-                              <Label alignment="CENTER" layoutY="30.0" maxWidth="100.0" prefHeight="40.0" prefWidth="100.0" rotate="-90.0" text="Pacific avenue" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" />
+                              <Label id="field_name" alignment="CENTER" layoutY="30.0" maxWidth="100.0" prefHeight="40.0" prefWidth="100.0" rotate="-90.0" text="Pacific avenue" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" />
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1fb25a" height="20.0" layoutX="-40.0" layoutY="40.0" rotate="90.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
                               <Label id="PLAYER_ONE" fx:id="player1Label113" layoutX="14.0" layoutY="14.0" style="-fx-background-color: #e61f23; -fx-padding: 3px 5px;" text="P1" textFill="WHITE" visible="false">
                                  <font>
@@ -174,7 +174,7 @@
                         <AnchorPane fx:id="anchorPane24" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="2">
                            <children>
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f8f8f8" height="100.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
-                              <Label alignment="CENTER" layoutY="30.0" maxWidth="100.0" prefHeight="40.0" prefWidth="100.0" rotate="-90.0" text="Atlantic avenue" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" />
+                              <Label id="field_name" alignment="CENTER" layoutY="30.0" maxWidth="100.0" prefHeight="40.0" prefWidth="100.0" rotate="-90.0" text="Atlantic avenue" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" />
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1fb25a" height="20.0" layoutX="-40.0" layoutY="40.0" rotate="90.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
                               <Label id="PLAYER_ONE" fx:id="player1Label114" layoutX="20.0" layoutY="14.0" style="-fx-background-color: #e61f23; -fx-padding: 3px 5px;" text="P1" textFill="WHITE" visible="false">
                                  <font>
@@ -191,7 +191,7 @@
                         <AnchorPane fx:id="anchorPane34" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="3">
                            <children>
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f8f8f8" height="100.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
-                              <Label alignment="CENTER" layoutY="30.0" maxWidth="100.0" prefHeight="40.0" prefWidth="100.0" rotate="-90.0" text="Ventnor avenue" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" />
+                              <Label id="field_name" alignment="CENTER" layoutY="30.0" maxWidth="100.0" prefHeight="40.0" prefWidth="100.0" rotate="-90.0" text="Ventnor avenue" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" />
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1fb25a" height="20.0" layoutX="-40.0" layoutY="40.0" rotate="-90.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
                               <Label id="PLAYER_ONE" fx:id="player1Label115" layoutX="14.0" layoutY="14.0" style="-fx-background-color: #e61f23; -fx-padding: 3px 5px;" text="P1" textFill="WHITE" visible="false">
                                  <font>
@@ -208,7 +208,7 @@
                         <AnchorPane fx:id="anchorPane44" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="4">
                            <children>
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f8f8f8" height="100.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
-                              <Label alignment="CENTER" layoutY="30.0" maxWidth="100.0" prefHeight="40.0" prefWidth="100.0" rotate="320.0" text="Free parking" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
+                              <Label id="field_name" alignment="CENTER" layoutY="30.0" maxWidth="100.0" prefHeight="40.0" prefWidth="100.0" rotate="320.0" text="Free parking" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
                                  </font>
@@ -228,7 +228,7 @@
                         <AnchorPane fx:id="anchorPane43" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="4">
                            <children>
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f8f8f8" height="100.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
-                              <Label alignment="CENTER" layoutY="30.0" maxWidth="100.0" prefHeight="40.0" prefWidth="100.0" text="New York avenue" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" />
+                              <Label id="field_name" alignment="CENTER" layoutY="30.0" maxWidth="100.0" prefHeight="40.0" prefWidth="100.0" text="New York avenue" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" />
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d93a96" height="20.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
                               <Label id="PLAYER_ONE" fx:id="player1Label117" layoutX="14.0" layoutY="13.0" style="-fx-background-color: #e61f23; -fx-padding: 3px 5px;" text="P1" textFill="WHITE" visible="false">
                                  <font>
@@ -245,7 +245,7 @@
                         <AnchorPane fx:id="anchorPane41" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                            <children>
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f8f8f8" height="100.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
-                              <Label alignment="CENTER" layoutY="30.0" maxWidth="100.0" prefHeight="40.0" prefWidth="100.0" text="Virginia avenue" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" />
+                              <Label id="field_name" alignment="CENTER" layoutY="30.0" maxWidth="100.0" prefHeight="40.0" prefWidth="100.0" text="Virginia avenue" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" />
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d93a96" height="20.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
                               <Label id="PLAYER_ONE" fx:id="player1Label118" layoutX="14.0" layoutY="20.0" style="-fx-background-color: #e61f23; -fx-padding: 3px 5px;" text="P1" textFill="WHITE" visible="false">
                                  <font>
@@ -262,7 +262,7 @@
                         <AnchorPane fx:id="anchorPane42" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="4">
                            <children>
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f8f8f8" height="100.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
-                              <Label alignment="CENTER" layoutY="30.0" maxWidth="100.0" prefHeight="40.0" prefWidth="100.0" text="Tennessee avenue" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" />
+                              <Label id="field_name" alignment="CENTER" layoutY="30.0" maxWidth="100.0" prefHeight="40.0" prefWidth="100.0" text="Tennessee avenue" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" />
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d93a96" height="20.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
                               <Label id="PLAYER_ONE" fx:id="player1Label119" layoutX="14.0" layoutY="13.0" style="-fx-background-color: #e61f23; -fx-padding: 3px 5px;" text="P1" textFill="WHITE" visible="false">
                                  <font>
@@ -279,7 +279,7 @@
                         <AnchorPane fx:id="anchorPane40" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
                            <children>
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f8f8f8" height="100.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
-                              <Label alignment="CENTER" layoutY="30.0" maxWidth="100.0" prefHeight="40.0" prefWidth="100.0" rotate="40.0" text="Go to jail" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
+                              <Label id="field_name" alignment="CENTER" layoutY="30.0" maxWidth="100.0" prefHeight="40.0" prefWidth="100.0" rotate="40.0" text="Go to jail" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
                                  </font>
@@ -299,7 +299,7 @@
                         <AnchorPane fx:id="anchorPane10" prefHeight="200.0" prefWidth="200.0" rotate="180.0" GridPane.rowIndex="1">
                            <children>
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f8f8f8" height="100.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
-                              <Label alignment="CENTER" layoutY="30.0" maxWidth="100.0" prefHeight="40.0" prefWidth="100.0" rotate="-90.0" text="States avenue" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" />
+                              <Label id="field_name" alignment="CENTER" layoutY="30.0" maxWidth="100.0" prefHeight="40.0" prefWidth="100.0" rotate="-90.0" text="States avenue" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" />
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f7941d" height="20.0" layoutX="-40.0" layoutY="40.0" rotate="90.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
                               <Label id="PLAYER_ONE" fx:id="player1Label1111" layoutX="63.0" layoutY="64.0" rotate="180.0" style="-fx-background-color: #e61f23; -fx-padding: 3px 5px;" text="P1" textFill="WHITE" visible="false">
                                  <font>
@@ -316,7 +316,7 @@
                         <AnchorPane fx:id="anchorPane20" prefHeight="200.0" prefWidth="200.0" rotate="180.0" GridPane.rowIndex="2">
                            <children>
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f8f8f8" height="100.0" rotate="180.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
-                              <Label alignment="CENTER" layoutY="30.0" maxWidth="100.0" prefHeight="40.0" prefWidth="100.0" rotate="-90.0" text="Boardwalk" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" />
+                              <Label id="field_name" alignment="CENTER" layoutY="30.0" maxWidth="100.0" prefHeight="40.0" prefWidth="100.0" rotate="-90.0" text="Boardwalk" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" />
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f7941d" height="20.0" layoutX="-40.0" layoutY="40.0" rotate="90.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
                               <Label id="PLAYER_ONE" fx:id="player1Label1112" layoutX="57.0" layoutY="58.0" rotate="180.0" style="-fx-background-color: #e61f23; -fx-padding: 3px 5px;" text="P1" textFill="WHITE" visible="false">
                                  <font>
@@ -333,7 +333,7 @@
                         <AnchorPane fx:id="anchorPane30" prefHeight="200.0" prefWidth="200.0" rotate="180.0" GridPane.rowIndex="3">
                            <children>
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f8f8f8" height="100.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
-                              <Label alignment="CENTER" layoutY="30.0" maxWidth="100.0" prefHeight="40.0" prefWidth="100.0" rotate="-90.0" text="Park place" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" />
+                              <Label id="field_name" alignment="CENTER" layoutY="30.0" maxWidth="100.0" prefHeight="40.0" prefWidth="100.0" rotate="-90.0" text="Park place" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" />
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f7941d" height="20.0" layoutX="-40.0" layoutY="40.0" rotate="90.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
                               <Label id="PLAYER_ONE" fx:id="player1Label1113" layoutX="62.0" layoutY="48.0" rotate="180.0" style="-fx-background-color: #e61f23; -fx-padding: 3px 5px;" text="P1" textFill="WHITE" visible="false">
                                  <font>

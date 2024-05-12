@@ -1,6 +1,7 @@
 package hr.java.game.monopoly.thread;
 import hr.java.game.monopoly.Monopoly;
 import hr.java.game.monopoly.MonopolyController;
+import hr.java.game.monopoly.model.Field;
 import hr.java.game.monopoly.model.GameState;
 import hr.java.game.monopoly.model.PlayerTurn;
 import javafx.application.Platform;
@@ -34,18 +35,17 @@ public class PlayerTwoServerThread implements Runnable {
     private static void processSerializableClient(Socket clientSocket) {
         try (ObjectInputStream ois = new ObjectInputStream(clientSocket.getInputStream());
              ObjectOutputStream oos = new ObjectOutputStream(clientSocket.getOutputStream());){
-            System.err.println("processSerializableClient Client received: " + ois.readObject());
             GameState gameState = (GameState)ois.readObject();
 
             GameState.convertGameStateToGameStateWithFields(
-                    gameState.getGameBoardFields(),
-                    MonopolyController.boardFields
+                    MonopolyController.boardFields,
+                    gameState.getGameFields()
             );
 
             Monopoly.playerTurn = gameState.getPlayerTurn();
             MonopolyController.deactivateButtons(true);
 
-            System.out.println("Player two received the game state!" + gameState.getPlayerTwoPosition());
+            System.out.println("Player one received the game state! " + gameState.getPlayerTwoPosition());
             oos.writeObject("Player two received the game state - confirmation!");
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();

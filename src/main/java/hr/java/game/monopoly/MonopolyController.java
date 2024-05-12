@@ -126,11 +126,14 @@ public class MonopolyController {
             for (Node node : boardState[i].getChildren()) {
                 if (node instanceof Label) {
                     Label label = (Label) node;
-                    String labelText = label.getText();
-                    if(i != 0 && i != 4 && i != 8 && i != 12){
-                        boardFields[i] = new Field(i, labelText, 500 + i * 15, 150 + i * 15);
-                    }else {
-                        boardFields[i] = new Field(i, labelText, 0, 0);
+                    String labelText = "";
+                    if(label.getId().equals("field_name")){
+                        labelText = label.getText();
+                        if(i != 0 && i != 4 && i != 8 && i != 12){
+                            boardFields[i] = new Field(i, labelText, 500 + i * 15, 150 + i * 15);
+                        }else {
+                            boardFields[i] = new Field(i, labelText, 0, 0);
+                        }
                     }
                 }
             }
@@ -219,20 +222,24 @@ public class MonopolyController {
                     payRentButton.setDisable(true);
                 }
             }
-        } else if (field.getOwner().getId() == player.getId()) {
-            if(player.getWallet() > field.getPrice() * 15 / 100){
-                fillInfoLog("You moved to " + field.getTitle() + ". Do you want to upgrade your field for " + field.getPrice() * 15 / 100 + "€?");
-                buyButton.setDisable(false);
-                payRentButton.setDisable(true);
+        } else {
+            System.out.println("FILED OWNER: " + field.getOwner().getName());
+            if (field.getOwner().getId() == player.getId()) {
+                if (player.getWallet() > field.getPrice() * 15 / 100) {
+                    fillInfoLog("You moved to " + field.getTitle() + ". Do you want to upgrade your field for " + field.getPrice() * 15 / 100 + "€?");
+                    buyButton.setDisable(false);
+                    payRentButton.setDisable(true);
+                } else {
+                    fillInfoLog("You moved to " + field.getTitle() + ". You don't have money to upgrade your field for " + field.getPrice() * 15 / 100 + "€. please click next.");
+                    buyButton.setDisable(true);
+                    payRentButton.setDisable(true);
+                }
             }else{
-                fillInfoLog("You moved to " + field.getTitle() + ". You don't have money to upgrade your field for " + field.getPrice() * 15 / 100 + "€. please click next.");
+                System.out.println("ELSE STATE -> FILED OWNER: " + field.getOwner().getName());
                 buyButton.setDisable(true);
-                payRentButton.setDisable(true);
+                payRentButton.setDisable(false);
+                fillInfoLog("You moved to "+ player.getName()+ " field " + field.getTitle() + ". You need to pay a rent of " + field.getRentPrice() + "€!");
             }
-        } else{
-            buyButton.setDisable(true);
-            payRentButton.setDisable(false);
-            fillInfoLog("You moved to "+ player.getName()+ " field " + field.getTitle() + ". You need to pay a rent of " + field.getRentPrice() + "€!");
         }
     }
 
@@ -249,18 +256,36 @@ public class MonopolyController {
         fillPlayerInfo(player);
     }
 
+    void payRentAction (Player player, Field field){
+        if(field.getOwner() == null){
+            if(field.getOwner().getId() != player.getId()){
+                player.payRent(field.getRentPrice());
+                if(Monopoly.playerTurn.name().equals(PlayerTurn.PLAYER_ONE.name())){
+                    player2.addToWallet(field.getRentPrice());
+                }else{
+                    player1.addToWallet(field.getRentPrice());
+                }
+            }
+        }
+        fillPlayerInfo(player);
+    }
+
     public static void deactivateButtons(boolean state) {
         buttonDisable = state;
     }
 
     public static void managePlayerLabel(Player player, Boolean state) {
-        for (Node node : boardState[player.getCurrentField()].getChildren()) {
-            System.out.println("Node: " + node);
-            if (node instanceof Label) {
-                Label playerLabel = (Label) node;
-                if(player.getName().equals(playerLabel.getId())) {
-                    System.out.println("-------------- player.getName() == playerLabel.getId(): " + player.getName().equals(playerLabel.getId()) + " " + playerLabel.getId());
-                    playerLabel.setVisible(state);
+        for(int i = 0; i < boardState.length; i++ ){
+            for (Node node : boardState[i].getChildren()) {
+                if (node instanceof Label) {
+                    Label playerLabel = (Label) node;
+                    if(player.getName().equals(playerLabel.getId())) {
+                        if(player.getCurrentField() == i){
+                            playerLabel.setVisible(state);
+                        }else{
+                            playerLabel.setVisible(false);
+                        }
+                    }
                 }
             }
         }
@@ -322,7 +347,11 @@ public class MonopolyController {
         Thread thread = new Thread(){
             public void run(){
                 try {
-                    System.out.println(Monopoly.playerTurn.name() + " pressed Pay rent button");
+                    if(Monopoly.playerTurn.name().equals(PlayerTurn.PLAYER_ONE.name())){
+                        payRentAction(player1, boardFields[player1.getCurrentField()]);
+                    }else{
+                        payRentAction(player2, boardFields[player2.getCurrentField()]);
+                    }
                     Thread.sleep(50);
                     payRentButton.setDisable(false);
                 } catch (InterruptedException e) {
@@ -337,7 +366,7 @@ public class MonopolyController {
     void next(ActionEvent event) {
         nextButton.setDisable(true);
         GameState gameState = new GameState();
-        gameState.setGameBoardFields(boardFields);
+        gameState.setGameFields(boardFields);
 
 
         if(Monopoly.playerTurn.name().equals(PlayerTurn.PLAYER_ONE.name())){
@@ -363,7 +392,8 @@ public class MonopolyController {
 
     private static void playerOneSendRequest(GameState gameState) {
         // Closing socket will also close the socket's InputStream and OutputStream.
-        try (Socket clientSocket = new Socket(Monopoly.HOST, Monopoly.PLAYER_TWO_SERVER_PORT)) {
+        try (Socket clientSocket = new Socket(Monopoly.HOST, Monopoly.PLAYER_TWO_SERVER_PORT)
+        ) {
             System.err.println("Client is connecting to " + clientSocket.getInetAddress() + ":" + clientSocket.getPort());
 
             //sendPrimitiveRequest(clientSocket);

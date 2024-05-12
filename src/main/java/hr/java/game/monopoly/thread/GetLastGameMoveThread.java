@@ -31,13 +31,17 @@ public class GetLastGameMoveThread extends GameMoveThread implements Runnable {
     }
 
     public void managePlayerLabel(Integer position, Boolean state, String playerName) {
-        for (Node node : boardFields[position].getChildren()) {
-            System.out.println("Node: " + node);
-            if (node instanceof Label) {
-                Label playerLabel = (Label) node;
-                if(playerName.equals(playerLabel.getId())) {
-                    System.out.println("-------------- player.getName() == playerLabel.getId(): " + playerName.equals(playerLabel.getId()) + " " + playerLabel.getId() + " " + playerName);
-                    playerLabel.setVisible(state);
+        for(int i = 0; i < boardFields.length; i++ ){
+            for (Node node : boardFields[i].getChildren()) {
+                if (node instanceof Label) {
+                    Label playerLabel = (Label) node;
+                    if(playerName.equals(playerLabel.getId())) {
+                        if(position == i){
+                            playerLabel.setVisible(state);
+                        }else{
+                            playerLabel.setVisible(false);
+                        }
+                    }
                 }
             }
         }

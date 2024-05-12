@@ -25,7 +25,7 @@ public class Player implements Serializable {
     public void buyField(int withdrawAmount, Field field) {
         if(withdrawAmount > this.wallet) {
             this.wallet = 0;
-            System.out.println("Player "+ this.id + " went bankrupt!");
+//            System.out.println("Player "+ this.id + " went bankrupt!");
         } else {
             if(this.fieldsOwns.isEmpty()){
                 this.fieldsOwns.add(field);
@@ -40,6 +40,15 @@ public class Player implements Serializable {
                     }
                 }
             }
+            this.wallet -= withdrawAmount;
+        }
+    }
+
+    public void payRent(int withdrawAmount) {
+        if(withdrawAmount > this.wallet) {
+            this.wallet = 0;
+            System.out.println("Player "+ this.id + " went bankrupt!");
+        } else {
             this.wallet -= withdrawAmount;
         }
     }
