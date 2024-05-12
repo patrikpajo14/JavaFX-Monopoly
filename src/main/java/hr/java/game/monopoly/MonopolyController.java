@@ -1,7 +1,12 @@
 package hr.java.game.monopoly;
 
 import hr.java.game.monopoly.model.*;
+import hr.java.game.monopoly.thread.GetLastGameMoveThread;
+import hr.java.game.monopoly.thread.SaveNewGameMoveThread;
 import hr.java.game.monopoly.util.DocumentationUtils;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,12 +17,16 @@ import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class MonopolyController {
 
@@ -70,6 +79,8 @@ public class MonopolyController {
     @FXML
     private TextArea infoLogTextArea;
     @FXML
+    private Label lastGameMoveLabel;
+    @FXML
     private ImageView diceImage;
     @FXML
     private Button rollButton;
@@ -80,6 +91,9 @@ public class MonopolyController {
 
     public static Player player1;
     public static Player player2;
+
+    List<GameMove> gameMoves = new ArrayList<>();
+
     @FXML
     public void initialize() {
         dice = new Dice(diceImage, 1);
@@ -132,6 +146,11 @@ public class MonopolyController {
         payRentButton.setDisable(true);
         nextButton.setDisable(true);
 
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5), e -> {
+            Platform.runLater(new GetLastGameMoveThread(lastGameMoveLabel, boardState));
+        }));
+        timeline.setCycleCount(Animation.INDEFINITE);
+        timeline.playFromStart();
         fillInfoLog("Your turn, roll dice!");
     }
 
@@ -154,18 +173,32 @@ public class MonopolyController {
     }
 
     void movePlayer (Player player, Label playerLabel, int diceNumber){
+        rollButton.setDisable(true);
         Platform.runLater(() -> {
+            GameMove newGameMove = new GameMove();
+            newGameMove.setPlayerTurn(Monopoly.playerTurn);
+            newGameMove.setOldPosition(player.getCurrentField());
+            newGameMove.setLocalDateTime(LocalDateTime.now());
+
             if (player.getCurrentField() + diceNumber >= boardState.length){
                 int tmpBr = player.getCurrentField() + diceNumber - boardState.length;
-                boardState[player.getCurrentField()].getChildren().remove(playerLabel);
-                boardState[tmpBr].getChildren().add(playerLabel);
+                managePlayerLabel(player, false);
                 player.setCurrentField(tmpBr);
+                managePlayerLabel(player, true);
+                newGameMove.setNewPosition(player.getCurrentField());
             }else{
-                boardState[player.getCurrentField()].getChildren().remove(playerLabel);
-                boardState[player.getCurrentField() + diceNumber].getChildren().add(playerLabel);
+                managePlayerLabel(player, false);
                 player.setCurrentField(player.getCurrentField() + diceNumber);
+                managePlayerLabel(player, true);
+                newGameMove.setNewPosition(player.getCurrentField());
             }
             checkIfFieldIsPurchased(player, boardFields[player.getCurrentField()]);
+
+            gameMoves.add(newGameMove);
+
+            SaveNewGameMoveThread saveNewGameMoveThread = new SaveNewGameMoveThread(newGameMove);
+            Thread starter = new Thread(saveNewGameMoveThread);
+            starter.start();
         });
     }
 
@@ -220,31 +253,21 @@ public class MonopolyController {
         buttonDisable = state;
     }
 
-    public static void synchronizedMovePlayer(Player player, Integer playerPosition) {
-        System.out.println("synchronizedMovePlayer" + player.getCurrentField() + " - " + playerPosition);
-        Platform.runLater(() -> {
-            for (Node node : boardState[player.getCurrentField()].getChildren()) {
-                if (node instanceof Label) {
-                    Label playerLabel = (Label) node;
-                    if (playerPosition >= boardState.length){
-                        int tmpBr = playerPosition - boardState.length;
-                        boardState[player.getCurrentField()].getChildren().remove(playerLabel);
-                        boardState[tmpBr].getChildren().add(playerLabel);
-                        player.setCurrentField(tmpBr);
-                    }else{
-                        boardState[player.getCurrentField()].getChildren().remove(playerLabel);
-                        boardState[playerPosition].getChildren().add(playerLabel);
-                        player.setCurrentField(playerPosition);
-                    }
+    public static void managePlayerLabel(Player player, Boolean state) {
+        for (Node node : boardState[player.getCurrentField()].getChildren()) {
+            System.out.println("Node: " + node);
+            if (node instanceof Label) {
+                Label playerLabel = (Label) node;
+                if(player.getName().equals(playerLabel.getId())) {
+                    System.out.println("-------------- player.getName() == playerLabel.getId(): " + player.getName().equals(playerLabel.getId()) + " " + playerLabel.getId());
+                    playerLabel.setVisible(state);
                 }
             }
-        });
+        }
     }
 
     @FXML
     void roll(ActionEvent event) {
-
-        rollButton.setDisable(true);
 
         Thread thread = new Thread(){
             public void run(){
@@ -332,7 +355,7 @@ public class MonopolyController {
         } else if (Monopoly.playerTurn.name().equals(PlayerTurn.PLAYER_TWO.name())) {
             playerTwoSendRequest(gameState);
         }
-        nextButton.setDisable(false);
+        buyButton.setDisable(true);
         rollButton.setDisable(false);
 
         fillInfoLog("Your turn, roll dice!");

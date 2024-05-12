@@ -71,12 +71,12 @@
                                     <Font name="System Bold" size="14.0" />
                                  </font>
                               </Label>
-                              <Label id="player_one" fx:id="player1Label" layoutX="18.0" layoutY="15.0" style="-fx-background-color: #e61f23; -fx-padding: 3px 5px;" text="P1" textFill="WHITE">
+                              <Label id="PLAYER_ONE" fx:id="player1Label" layoutX="18.0" layoutY="15.0" style="-fx-background-color: #e61f23; -fx-padding: 3px 5px;" text="P1" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="18.0" />
                                  </font>
                               </Label>
-                              <Label id="player_one" fx:id="player2Label" layoutX="50.0" layoutY="51.0" style="-fx-background-color: #005999; -fx-padding: 3px 5px;" text="P2" textFill="WHITE">
+                              <Label id="PLAYER_TWO" fx:id="player2Label" layoutX="50.0" layoutY="51.0" style="-fx-background-color: #005999; -fx-padding: 3px 5px;" text="P2" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="18.0" />
                                  </font>
@@ -88,6 +88,16 @@
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f8f8f8" height="100.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
                               <Label alignment="CENTER" layoutY="30.0" maxWidth="100.0" prefHeight="40.0" prefWidth="100.0" rotate="180.0" text="Mediteranean avenue" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" />
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0171bb" height="20.0" layoutY="80.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
+                              <Label id="PLAYER_ONE" fx:id="player1Label1" layoutX="14.0" layoutY="13.0" style="-fx-background-color: #e61f23; -fx-padding: 3px 5px;" text="P1" textFill="WHITE" visible="false">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label id="PLAYER_TWO" fx:id="player2Label1" layoutX="50.0" layoutY="47.0" style="-fx-background-color: #005999; -fx-padding: 3px 5px;" text="P2" textFill="WHITE" visible="false">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
                            </children>
                         </AnchorPane>
                         <AnchorPane fx:id="anchorPane02" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
@@ -95,6 +105,16 @@
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f8f8f8" height="100.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
                               <Label alignment="CENTER" layoutY="30.0" maxWidth="100.0" prefHeight="40.0" prefWidth="100.0" rotate="180.0" text="Baltic avenue" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" />
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0171bb" height="20.0" layoutY="80.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
+                              <Label id="PLAYER_ONE" fx:id="player1Label11" layoutX="14.0" layoutY="13.0" style="-fx-background-color: #e61f23; -fx-padding: 3px 5px;" text="P1" textFill="WHITE" visible="false">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label id="PLAYER_TWO" fx:id="player2Label11" layoutX="54.0" layoutY="47.0" style="-fx-background-color: #005999; -fx-padding: 3px 5px;" text="P2" textFill="WHITE" visible="false">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
                            </children>
                         </AnchorPane>
                         <AnchorPane fx:id="anchorPane03" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3">
@@ -102,6 +122,16 @@
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f8f8f8" height="100.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
                               <Label alignment="CENTER" layoutY="30.0" maxWidth="100.0" prefHeight="40.0" prefWidth="100.0" rotate="180.0" text="Oriental avenue" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" />
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0171bb" height="20.0" layoutY="80.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
+                              <Label id="PLAYER_ONE" fx:id="player1Label111" layoutX="14.0" layoutY="13.0" style="-fx-background-color: #e61f23; -fx-padding: 3px 5px;" text="P1" textFill="WHITE" visible="false">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label id="PLAYER_TWO" fx:id="player2Label12" layoutX="50.0" layoutY="47.0" style="-fx-background-color: #005999; -fx-padding: 3px 5px;" text="P2" textFill="WHITE" visible="false">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
                            </children>
                         </AnchorPane>
                         <AnchorPane fx:id="anchorPane04" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4">
@@ -112,6 +142,16 @@
                                     <Font name="System Bold" size="14.0" />
                                  </font>
                               </Label>
+                              <Label id="PLAYER_ONE" fx:id="player1Label112" layoutX="14.0" layoutY="14.0" style="-fx-background-color: #e61f23; -fx-padding: 3px 5px;" text="P1" textFill="WHITE" visible="false">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label id="PLAYER_TWO" fx:id="player2Label13" layoutX="54.0" layoutY="50.0" style="-fx-background-color: #005999; -fx-padding: 3px 5px;" text="P2" textFill="WHITE" visible="false">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
                            </children>
                         </AnchorPane>
                         <AnchorPane fx:id="anchorPane14" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="1">
@@ -119,6 +159,16 @@
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f8f8f8" height="100.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
                               <Label alignment="CENTER" layoutY="30.0" maxWidth="100.0" prefHeight="40.0" prefWidth="100.0" rotate="-90.0" text="Pacific avenue" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" />
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1fb25a" height="20.0" layoutX="-40.0" layoutY="40.0" rotate="90.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
+                              <Label id="PLAYER_ONE" fx:id="player1Label113" layoutX="14.0" layoutY="14.0" style="-fx-background-color: #e61f23; -fx-padding: 3px 5px;" text="P1" textFill="WHITE" visible="false">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label id="PLAYER_TWO" fx:id="player2Label14" layoutX="54.0" layoutY="50.0" style="-fx-background-color: #005999; -fx-padding: 3px 5px;" text="P2" textFill="WHITE" visible="false">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
                            </children>
                         </AnchorPane>
                         <AnchorPane fx:id="anchorPane24" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="2">
@@ -126,6 +176,16 @@
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f8f8f8" height="100.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
                               <Label alignment="CENTER" layoutY="30.0" maxWidth="100.0" prefHeight="40.0" prefWidth="100.0" rotate="-90.0" text="Atlantic avenue" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" />
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1fb25a" height="20.0" layoutX="-40.0" layoutY="40.0" rotate="90.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
+                              <Label id="PLAYER_ONE" fx:id="player1Label114" layoutX="20.0" layoutY="14.0" style="-fx-background-color: #e61f23; -fx-padding: 3px 5px;" text="P1" textFill="WHITE" visible="false">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label id="PLAYER_TWO" fx:id="player2Label15" layoutX="54.0" layoutY="50.0" style="-fx-background-color: #005999; -fx-padding: 3px 5px;" text="P2" textFill="WHITE" visible="false">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
                            </children>
                         </AnchorPane>
                         <AnchorPane fx:id="anchorPane34" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="3">
@@ -133,6 +193,16 @@
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f8f8f8" height="100.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
                               <Label alignment="CENTER" layoutY="30.0" maxWidth="100.0" prefHeight="40.0" prefWidth="100.0" rotate="-90.0" text="Ventnor avenue" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" />
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1fb25a" height="20.0" layoutX="-40.0" layoutY="40.0" rotate="-90.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
+                              <Label id="PLAYER_ONE" fx:id="player1Label115" layoutX="14.0" layoutY="14.0" style="-fx-background-color: #e61f23; -fx-padding: 3px 5px;" text="P1" textFill="WHITE" visible="false">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label id="PLAYER_TWO" fx:id="player2Label16" layoutX="54.0" layoutY="50.0" style="-fx-background-color: #005999; -fx-padding: 3px 5px;" text="P2" textFill="WHITE" visible="false">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
                            </children>
                         </AnchorPane>
                         <AnchorPane fx:id="anchorPane44" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="4">
@@ -143,6 +213,16 @@
                                     <Font name="System Bold" size="14.0" />
                                  </font>
                               </Label>
+                              <Label id="PLAYER_ONE" fx:id="player1Label116" layoutX="14.0" layoutY="14.0" style="-fx-background-color: #e61f23; -fx-padding: 3px 5px;" text="P1" textFill="WHITE" visible="false">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label id="PLAYER_TWO" fx:id="player2Label17" layoutX="50.0" layoutY="48.0" style="-fx-background-color: #005999; -fx-padding: 3px 5px;" text="P2" textFill="WHITE" visible="false">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
                            </children>
                         </AnchorPane>
                         <AnchorPane fx:id="anchorPane43" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="4">
@@ -150,6 +230,16 @@
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f8f8f8" height="100.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
                               <Label alignment="CENTER" layoutY="30.0" maxWidth="100.0" prefHeight="40.0" prefWidth="100.0" text="New York avenue" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" />
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d93a96" height="20.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
+                              <Label id="PLAYER_ONE" fx:id="player1Label117" layoutX="14.0" layoutY="13.0" style="-fx-background-color: #e61f23; -fx-padding: 3px 5px;" text="P1" textFill="WHITE" visible="false">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label id="PLAYER_TWO" fx:id="player2Label18" layoutX="50.0" layoutY="53.0" style="-fx-background-color: #005999; -fx-padding: 3px 5px;" text="P2" textFill="WHITE" visible="false">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
                            </children>
                         </AnchorPane>
                         <AnchorPane fx:id="anchorPane41" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
@@ -157,6 +247,16 @@
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f8f8f8" height="100.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
                               <Label alignment="CENTER" layoutY="30.0" maxWidth="100.0" prefHeight="40.0" prefWidth="100.0" text="Virginia avenue" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" />
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d93a96" height="20.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
+                              <Label id="PLAYER_ONE" fx:id="player1Label118" layoutX="14.0" layoutY="20.0" style="-fx-background-color: #e61f23; -fx-padding: 3px 5px;" text="P1" textFill="WHITE" visible="false">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label id="PLAYER_TWO" fx:id="player2Label19" layoutX="50.0" layoutY="53.0" style="-fx-background-color: #005999; -fx-padding: 3px 5px;" text="P2" textFill="WHITE" visible="false">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
                            </children>
                         </AnchorPane>
                         <AnchorPane fx:id="anchorPane42" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="4">
@@ -164,6 +264,16 @@
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f8f8f8" height="100.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
                               <Label alignment="CENTER" layoutY="30.0" maxWidth="100.0" prefHeight="40.0" prefWidth="100.0" text="Tennessee avenue" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" />
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d93a96" height="20.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
+                              <Label id="PLAYER_ONE" fx:id="player1Label119" layoutX="14.0" layoutY="13.0" style="-fx-background-color: #e61f23; -fx-padding: 3px 5px;" text="P1" textFill="WHITE" visible="false">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label id="PLAYER_TWO" fx:id="player2Label110" layoutX="50.0" layoutY="53.0" style="-fx-background-color: #005999; -fx-padding: 3px 5px;" text="P2" textFill="WHITE" visible="false">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
                            </children>
                         </AnchorPane>
                         <AnchorPane fx:id="anchorPane40" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
@@ -174,6 +284,16 @@
                                     <Font name="System Bold" size="14.0" />
                                  </font>
                               </Label>
+                              <Label id="PLAYER_ONE" fx:id="player1Label1110" layoutX="14.0" layoutY="14.0" style="-fx-background-color: #e61f23; -fx-padding: 3px 5px;" text="P1" textFill="WHITE" visible="false">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label id="PLAYER_TWO" fx:id="player2Label111" layoutX="50.0" layoutY="48.0" style="-fx-background-color: #005999; -fx-padding: 3px 5px;" text="P2" textFill="WHITE" visible="false">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
                            </children>
                         </AnchorPane>
                         <AnchorPane fx:id="anchorPane10" prefHeight="200.0" prefWidth="200.0" rotate="180.0" GridPane.rowIndex="1">
@@ -181,6 +301,16 @@
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f8f8f8" height="100.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
                               <Label alignment="CENTER" layoutY="30.0" maxWidth="100.0" prefHeight="40.0" prefWidth="100.0" rotate="-90.0" text="States avenue" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" />
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f7941d" height="20.0" layoutX="-40.0" layoutY="40.0" rotate="90.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
+                              <Label id="PLAYER_ONE" fx:id="player1Label1111" layoutX="63.0" layoutY="64.0" rotate="180.0" style="-fx-background-color: #e61f23; -fx-padding: 3px 5px;" text="P1" textFill="WHITE" visible="false">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label id="PLAYER_TWO" fx:id="player2Label112" layoutX="17.0" layoutY="12.0" rotate="180.0" style="-fx-background-color: #005999; -fx-padding: 3px 5px;" text="P2" textFill="WHITE" visible="false">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
                            </children>
                         </AnchorPane>
                         <AnchorPane fx:id="anchorPane20" prefHeight="200.0" prefWidth="200.0" rotate="180.0" GridPane.rowIndex="2">
@@ -188,6 +318,16 @@
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f8f8f8" height="100.0" rotate="180.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
                               <Label alignment="CENTER" layoutY="30.0" maxWidth="100.0" prefHeight="40.0" prefWidth="100.0" rotate="-90.0" text="Boardwalk" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" />
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f7941d" height="20.0" layoutX="-40.0" layoutY="40.0" rotate="90.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
+                              <Label id="PLAYER_ONE" fx:id="player1Label1112" layoutX="57.0" layoutY="58.0" rotate="180.0" style="-fx-background-color: #e61f23; -fx-padding: 3px 5px;" text="P1" textFill="WHITE" visible="false">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label id="PLAYER_TWO" fx:id="player2Label113" layoutX="15.0" layoutY="24.0" rotate="180.0" style="-fx-background-color: #005999; -fx-padding: 3px 5px;" text="P2" textFill="WHITE" visible="false">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
                            </children>
                         </AnchorPane>
                         <AnchorPane fx:id="anchorPane30" prefHeight="200.0" prefWidth="200.0" rotate="180.0" GridPane.rowIndex="3">
@@ -195,6 +335,16 @@
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f8f8f8" height="100.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
                               <Label alignment="CENTER" layoutY="30.0" maxWidth="100.0" prefHeight="40.0" prefWidth="100.0" rotate="-90.0" text="Park place" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" />
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f7941d" height="20.0" layoutX="-40.0" layoutY="40.0" rotate="90.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
+                              <Label id="PLAYER_ONE" fx:id="player1Label1113" layoutX="62.0" layoutY="48.0" rotate="180.0" style="-fx-background-color: #e61f23; -fx-padding: 3px 5px;" text="P1" textFill="WHITE" visible="false">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label id="PLAYER_TWO" fx:id="player2Label114" layoutX="12.0" layoutY="14.0" rotate="180.0" style="-fx-background-color: #005999; -fx-padding: 3px 5px;" text="P2" textFill="WHITE" visible="false">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
                            </children>
                         </AnchorPane>
                         <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="2">
@@ -234,6 +384,7 @@
                   <Button id="rollButton" fx:id="payRentButton" layoutX="179.0" layoutY="433.0" mnemonicParsing="false" onAction="#payRent" prefHeight="27.0" prefWidth="105.0" style="-fx-background-color: #ffffff; -fx-border-color: #47abeb;" text="Pay rent" />
                   <TextArea fx:id="infoLogTextArea" layoutX="52.0" layoutY="260.0" prefHeight="72.0" prefWidth="232.0" wrapText="true" />
                   <TextArea fx:id="playerInfoTextArea" layoutX="51.0" layoutY="89.0" prefHeight="155.0" prefWidth="232.0" wrapText="true" />
+                  <Label fx:id="lastGameMoveLabel" layoutX="51.0" layoutY="345.0" prefHeight="18.0" prefWidth="232.0" />
                </children>
             </AnchorPane>
             <MenuBar prefHeight="25.0" prefWidth="712.0" GridPane.columnSpan="7" GridPane.valignment="TOP">

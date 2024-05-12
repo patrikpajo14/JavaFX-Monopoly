@@ -43,7 +43,6 @@ public class PlayerOneServerThread implements Runnable {
 
             Monopoly.playerTurn = gameState.getPlayerTurn();
             MonopolyController.deactivateButtons(true);
-            MonopolyController.synchronizedMovePlayer(gameState.getPlayerOne(), gameState.getPlayerOnePosition());
 
             System.out.println("Player two received the game state!");
             oos.writeObject("Player two received the game state - confirmation!");
