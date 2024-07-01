@@ -37,6 +37,8 @@ public class GameState implements Serializable {
         return gameStateWithString;
     }
 
+
+
     public static void convertGameStateToGameStateWithFields(Field[] gameBoardFields,  Field[] gameStateFields )
     {
         System.out.println("FIELDS TO STRING: " + gameBoardFields.toString());

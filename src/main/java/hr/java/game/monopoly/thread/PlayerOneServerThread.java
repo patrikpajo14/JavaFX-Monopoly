@@ -54,9 +54,14 @@ public class PlayerOneServerThread implements Runnable {
                     gameState.getGameFields()
             );
 
+
             Monopoly.playerTurn = gameState.getPlayerTurn();
             MonopolyController.deactivateButtons(true);
+            MonopolyController.player1.setWallet(gameState.getPlayerOne().getWallet());
+            MonopolyController.player2.setWallet(gameState.getPlayerTwo().getWallet());
 
+            System.out.println("PLAYER ONE WALLET: " + gameState.getPlayerOne().getWallet());
+            System.out.println("PLAYER TWO WALLET: " + gameState.getPlayerTwo().getWallet());
             System.out.println("Player one received the game state!");
             oos.writeObject("Player two received the game state - confirmation!");
         } catch (IOException | ClassNotFoundException e) {

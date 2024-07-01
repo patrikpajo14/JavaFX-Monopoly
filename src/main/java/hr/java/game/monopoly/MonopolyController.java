@@ -256,18 +256,20 @@ public class MonopolyController {
         fillPlayerInfo(player);
     }
 
-    void payRentAction (Player player, Field field){
-        if(field.getOwner() == null){
-            if(field.getOwner().getId() != player.getId()){
-                player.payRent(field.getRentPrice());
-                if(Monopoly.playerTurn.name().equals(PlayerTurn.PLAYER_ONE.name())){
-                    player2.addToWallet(field.getRentPrice());
-                }else{
-                    player1.addToWallet(field.getRentPrice());
-                }
-            }
+    void payRentAction(Player player, Field field) {
+        if (field.getOwner() != null && field.getOwner().getId() != player.getId()) {
+            int rentAmount = field.getRentPrice();
+            System.out.println("PLAYER THAT PAYS RENT: " + player.getWallet());
+            System.out.println("PLAYER WHO OWNS FIELD: " + field.getOwner().getWallet());
+
+            player.payRent(player.getId() == player1.getId() ? player2 : player1, rentAmount);
+            fillPlayerInfo(player);
+            fillInfoLog(player.getName() + " paid " + rentAmount + "€ rent to " + field.getOwner().getName() + ".");
+
+            System.out.println("AFTER PAYING RENt -----------------------------");
+            System.out.println("PLAYER THAT PAYS RENT: " + player.getWallet());
+            System.out.println("PLAYER WHI OWNS FIELD: " + field.getOwner().getWallet());
         }
-        fillPlayerInfo(player);
     }
 
     public static void deactivateButtons(boolean state) {
@@ -307,8 +309,10 @@ public class MonopolyController {
                     }
                     if(Monopoly.playerTurn.name().equals(PlayerTurn.PLAYER_ONE.name())){
                         movePlayer(player1, player1Label, dice.getDiceNumber());
+                        fillPlayerInfo(player1);
                     }else{
                         movePlayer(player2, player2Label, dice.getDiceNumber());
+                        fillPlayerInfo(player2);
                     }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -344,16 +348,15 @@ public class MonopolyController {
     @FXML
     void payRent(ActionEvent event) {
         payRentButton.setDisable(true);
-        Thread thread = new Thread(){
-            public void run(){
+        Thread thread = new Thread() {
+            public void run() {
                 try {
-                    if(Monopoly.playerTurn.name().equals(PlayerTurn.PLAYER_ONE.name())){
+                    if (Monopoly.playerTurn.name().equals(PlayerTurn.PLAYER_ONE.name())) {
                         payRentAction(player1, boardFields[player1.getCurrentField()]);
-                    }else{
+                    } else {
                         payRentAction(player2, boardFields[player2.getCurrentField()]);
                     }
                     Thread.sleep(50);
-                    payRentButton.setDisable(false);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
@@ -391,12 +394,10 @@ public class MonopolyController {
     }
 
     private static void playerOneSendRequest(GameState gameState) {
-        // Closing socket will also close the socket's InputStream and OutputStream.
         try (Socket clientSocket = new Socket(Monopoly.HOST, Monopoly.PLAYER_TWO_SERVER_PORT)
         ) {
             System.err.println("Client is connecting to " + clientSocket.getInetAddress() + ":" + clientSocket.getPort());
 
-            //sendPrimitiveRequest(clientSocket);
             sendSerializableRequestToPlayerTwo(clientSocket, gameState);
 
         } catch (IOException | ClassNotFoundException e) {
@@ -405,11 +406,9 @@ public class MonopolyController {
     }
 
     private static void playerTwoSendRequest(GameState gameState) {
-        // Closing socket will also close the socket's InputStream and OutputStream.
         try (Socket clientSocket = new Socket(Monopoly.HOST, Monopoly.PLAYER_ONE_SERVER_PORT)) {
             System.err.println("Client is connecting to " + clientSocket.getInetAddress() + ":" + clientSocket.getPort());
 
-            //sendPrimitiveRequest(clientSocket);
             sendSerializableRequestToPlayerOne(clientSocket, gameState);
 
         } catch (IOException | ClassNotFoundException e) {
@@ -421,6 +420,12 @@ public class MonopolyController {
         ObjectOutputStream oos = new ObjectOutputStream(client.getOutputStream());
         ObjectInputStream ois = new ObjectInputStream(client.getInputStream());
         oos.writeObject(gameState);
+        Platform.runLater(() -> {
+            player1.setWallet(gameState.getPlayerOne().getWallet());
+            player2.setWallet(gameState.getPlayerTwo().getWallet());
+        });
+        System.out.println("PLAYER ONE WALLET: " + gameState.getPlayerOne().getWallet());
+        System.out.println("PLAYER TWO WALLET: " + gameState.getPlayerTwo().getWallet());
         System.out.println("Game state sent to Player two! \n" + gameState.toString());
     }
 
@@ -428,6 +433,12 @@ public class MonopolyController {
         ObjectOutputStream oos = new ObjectOutputStream(client.getOutputStream());
         ObjectInputStream ois = new ObjectInputStream(client.getInputStream());
         oos.writeObject(gameState);
+        Platform.runLater(() -> {
+            player1.setWallet(gameState.getPlayerOne().getWallet());
+            player2.setWallet(gameState.getPlayerTwo().getWallet());
+        });
+        System.out.println("PLAYER ONE WALLET: " + gameState.getPlayerOne().getWallet());
+        System.out.println("PLAYER TWO WALLET: " + gameState.getPlayerTwo().getWallet());
         System.out.println("Game state sent to Player one! \n" + gameState.toString());
     }
 

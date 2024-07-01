@@ -21,13 +21,15 @@ public class GetLastGameMoveThread extends GameMoveThread implements Runnable {
     public void run() {
         GameMove lastGameMove = getLastGameMoveFromFile();
 
-        label.setText("Last game move: "
-                + lastGameMove.getPlayerTurn().name() + "; "
-                + lastGameMove.getNewPosition() + ", "
-                + lastGameMove.getLocalDateTime());
+        if(lastGameMove != null){
+            label.setText("Last game move: "
+                    + lastGameMove.getPlayerTurn().name() + "; "
+                    + lastGameMove.getNewPosition() + ", "
+                    + lastGameMove.getLocalDateTime());
 
-        managePlayerLabel(lastGameMove.getOldPosition(), false, lastGameMove.getPlayerTurn().name());
-        managePlayerLabel(lastGameMove.getNewPosition(), true, lastGameMove.getPlayerTurn().name());
+            managePlayerLabel(lastGameMove.getOldPosition(), false, lastGameMove.getPlayerTurn().name());
+            managePlayerLabel(lastGameMove.getNewPosition(), true, lastGameMove.getPlayerTurn().name());
+        }
     }
 
     public void managePlayerLabel(Integer position, Boolean state, String playerName) {

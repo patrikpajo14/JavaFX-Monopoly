@@ -44,13 +44,23 @@ public class Player implements Serializable {
         }
     }
 
-    public void payRent(int withdrawAmount) {
+    /*public void payRent(int withdrawAmount) {
         if(withdrawAmount > this.wallet) {
             this.wallet = 0;
             System.out.println("Player "+ this.id + " went bankrupt!");
         } else {
             this.wallet -= withdrawAmount;
         }
+    }*/
+
+    public void payRent(Player owner, int rentAmount) {
+        if (rentAmount > this.wallet) {
+            this.wallet = 0;
+            System.out.println("Player " + this.id + " went bankrupt!");
+        } else {
+            this.wallet -= rentAmount;
+        }
+        owner.addToWallet(rentAmount);
     }
 
     public void addToWallet(int walletAmount) {

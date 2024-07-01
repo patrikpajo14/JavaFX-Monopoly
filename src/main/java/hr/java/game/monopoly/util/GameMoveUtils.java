@@ -36,8 +36,22 @@ public class GameMoveUtils {
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-
-        return gameMoveList.get(gameMoveList.size() - 1);
+        if(!gameMoveList.isEmpty()){
+            return gameMoveList.getLast();
+        }else{
+            return null;
+        }
     }
 
+
+    public static void initializeGame() {
+        gameMoveList.clear();
+        try (ObjectOutputStream oos = new ObjectOutputStream(
+                new FileOutputStream(GAME_MOVE_HISTORY_FILE_NAME)))
+        {
+            oos.writeObject(gameMoveList);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
