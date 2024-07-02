@@ -1,6 +1,7 @@
 package hr.java.game.monopoly;
 
 import hr.java.game.monopoly.exception.WrongPlayerNameException;
+import hr.java.game.monopoly.jndi.ConfigurationReader;
 import hr.java.game.monopoly.model.Player;
 import hr.java.game.monopoly.model.PlayerTurn;
 import hr.java.game.monopoly.thread.PlayerOneServerThread;
@@ -27,14 +28,13 @@ public class Monopoly extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Monopoly.class.getResource("monopoly-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 950, 583);
+        Scene scene = new Scene(fxmlLoader.load(), 950, 780);
         stage.setTitle(playerTurn.name());
         stage.setScene(scene);
         stage.show();
     }
 
     public static void main(String[] args) {
-
         GameMoveUtils.initializeGame();
 
         String firstArgument = args[0];

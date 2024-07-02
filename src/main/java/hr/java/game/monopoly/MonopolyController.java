@@ -1,5 +1,7 @@
 package hr.java.game.monopoly;
 
+import hr.java.game.monopoly.chat.ChatService;
+import hr.java.game.monopoly.jndi.ConfigurationReader;
 import hr.java.game.monopoly.model.*;
 import hr.java.game.monopoly.thread.GetLastGameMoveThread;
 import hr.java.game.monopoly.thread.SaveNewGameMoveThread;
@@ -14,6 +16,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
@@ -23,6 +26,10 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -84,6 +91,14 @@ public class MonopolyController {
     private ImageView diceImage;
     @FXML
     private Button rollButton;
+    @FXML
+    private Button sendMessageButton;
+    @FXML
+    private TextField chatInput;
+    @FXML
+    private TextArea chatTextArea;
+    private static ChatService stub;
+
     private Dice dice;
     private static boolean buttonDisable = false;
     public static AnchorPane[] boardState;
@@ -149,12 +164,67 @@ public class MonopolyController {
         payRentButton.setDisable(true);
         nextButton.setDisable(true);
 
+        if(!Monopoly.playerTurn.name().equals(PlayerTurn.SINGLE_PLAYER.name())) {
+            try {
+                String rmiPort = ConfigurationReader.getValue(ConfigurationKey.RMI_PORT);
+                String serverName = ConfigurationReader.getValue(ConfigurationKey.RMI_HOST);
+                Registry registry = LocateRegistry.getRegistry(serverName, Integer.parseInt(rmiPort));
+                stub = (ChatService) registry.lookup(ChatService.REMOTE_OBJECT_NAME);
+            } catch (RemoteException | NotBoundException e) {
+                throw new RuntimeException(e);
+            }
+
+            Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2), e -> refreshChatTextArea()));
+            /*Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2), e -> {
+                refreshChatTextArea();
+                if (Monopoly.playerTurn.name().equals(PlayerTurn.PLAYER_ONE.name())) {
+                    fillPlayerInfo(player1);
+                } else {
+                    fillPlayerInfo(player2);
+                }
+            }));*/
+            timeline.setCycleCount(Animation.INDEFINITE);
+            timeline.playFromStart();
+        }
+
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5), e -> {
             Platform.runLater(new GetLastGameMoveThread(lastGameMoveLabel, boardState));
         }));
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.playFromStart();
         fillInfoLog("Your turn, roll dice!");
+    }
+
+    private void refreshChatTextArea() {
+        List<String> chatHistory = null;
+        try {
+            chatHistory = stub.returnChatHistory();
+        } catch (RemoteException e) {
+            throw new RuntimeException(e);
+        }
+
+        StringBuilder sb = new StringBuilder();
+
+        for (String message : chatHistory) {
+            sb.append(message);
+            sb.append("\n");
+        }
+
+        chatTextArea.setText(sb.toString());
+        chatTextArea.setScrollTop(Double.MAX_VALUE);
+    }
+
+    public void sendChatMessage() {
+        String chatMessage = chatInput.getText();
+        String playerName = Monopoly.playerTurn.name();
+
+        try {
+            stub.sendChatMessage(playerName + ": " + chatMessage);
+            refreshChatTextArea();
+            chatInput.setText("");
+        } catch (RemoteException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     void fillPlayerInfo (Player player){
