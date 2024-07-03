@@ -4,6 +4,7 @@ import hr.java.game.monopoly.MonopolyController;
 import hr.java.game.monopoly.model.Field;
 import hr.java.game.monopoly.model.GameState;
 import hr.java.game.monopoly.model.PlayerTurn;
+import hr.java.game.monopoly.util.DialogUtils;
 import javafx.application.Platform;
 
 import java.io.IOException;
@@ -36,33 +37,16 @@ public class PlayerOneServerThread implements Runnable {
         try (ObjectInputStream ois = new ObjectInputStream(clientSocket.getInputStream());
              ObjectOutputStream oos = new ObjectOutputStream(clientSocket.getOutputStream());){
             GameState gameState = (GameState)ois.readObject();
-
-            // Convert gameFields to string representation
-            StringBuilder fieldsStringBuilder = new StringBuilder();
-            for (Field field : gameState.getGameFields()) {
-                fieldsStringBuilder.append(field.toString()).append(", ");
-            }
-            String fieldsAsString = fieldsStringBuilder.toString();
-            if (fieldsAsString.length() > 2) {
-                fieldsAsString = fieldsAsString.substring(0, fieldsAsString.length() - 2); // Remove trailing comma and space
-            }
-
-            System.out.println("FIELDS RECEIVED: " + fieldsAsString);
-
             GameState.convertGameStateToGameStateWithFields(
                     MonopolyController.boardFields,
                     gameState.getGameFields()
             );
 
-
             Monopoly.playerTurn = gameState.getPlayerTurn();
-            MonopolyController.deactivateButtons(true);
             MonopolyController.player1.setWallet(gameState.getPlayerOne().getWallet());
             MonopolyController.player2.setWallet(gameState.getPlayerTwo().getWallet());
 
-            System.out.println("PLAYER ONE WALLET: " + gameState.getPlayerOne().getWallet());
-            System.out.println("PLAYER TWO WALLET: " + gameState.getPlayerTwo().getWallet());
-            System.out.println("Player one received the game state!");
+            DialogUtils.showWinnerDialog(MonopolyController.player1);
             oos.writeObject("Player two received the game state - confirmation!");
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();

@@ -5,6 +5,7 @@ import hr.java.game.monopoly.jndi.ConfigurationReader;
 import hr.java.game.monopoly.model.*;
 import hr.java.game.monopoly.thread.GetLastGameMoveThread;
 import hr.java.game.monopoly.thread.SaveNewGameMoveThread;
+import hr.java.game.monopoly.util.DialogUtils;
 import hr.java.game.monopoly.util.DocumentationUtils;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -13,10 +14,7 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
@@ -32,7 +30,6 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class MonopolyController {
@@ -92,6 +89,8 @@ public class MonopolyController {
     @FXML
     private Button rollButton;
     @FXML
+    private Button bankruptButton;
+    @FXML
     private Button sendMessageButton;
     @FXML
     private TextField chatInput;
@@ -100,7 +99,6 @@ public class MonopolyController {
     private static ChatService stub;
 
     private Dice dice;
-    private static boolean buttonDisable = false;
     public static AnchorPane[] boardState;
     public static Field[] boardFields;
 
@@ -113,8 +111,8 @@ public class MonopolyController {
     public void initialize() {
         dice = new Dice(diceImage, 1);
         if(player_name != null) player_name.setText(Monopoly.playerTurn.name());
-        player1 = new Player(1, PlayerTurn.PLAYER_ONE.name(), 5000);
-        player2 = new Player(2, PlayerTurn.PLAYER_TWO.name(), 5000);
+        player1 = new Player(1, PlayerTurn.PLAYER_ONE.name(), 2000);
+        player2 = new Player(2, PlayerTurn.PLAYER_TWO.name(), 2000);
 
         boardState = new AnchorPane[GameState.NUMBER_OF_ROWS * GameState.NUMBER_OF_COLUMNS];
 
@@ -174,15 +172,14 @@ public class MonopolyController {
                 throw new RuntimeException(e);
             }
 
-            Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2), e -> refreshChatTextArea()));
-            /*Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2), e -> {
+            Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2), e -> {
                 refreshChatTextArea();
                 if (Monopoly.playerTurn.name().equals(PlayerTurn.PLAYER_ONE.name())) {
                     fillPlayerInfo(player1);
                 } else {
                     fillPlayerInfo(player2);
                 }
-            }));*/
+            }));
             timeline.setCycleCount(Animation.INDEFINITE);
             timeline.playFromStart();
         }
@@ -305,10 +302,9 @@ public class MonopolyController {
                     payRentButton.setDisable(true);
                 }
             }else{
-                System.out.println("ELSE STATE -> FILED OWNER: " + field.getOwner().getName());
                 buyButton.setDisable(true);
                 payRentButton.setDisable(false);
-                fillInfoLog("You moved to "+ player.getName()+ " field " + field.getTitle() + ". You need to pay a rent of " + field.getRentPrice() + "€!");
+                fillInfoLog("You moved to "+ field.getOwner().getName() + " field " + field.getTitle() + ". You need to pay a rent of " + field.getRentPrice() + "€!");
             }
         }
     }
@@ -329,21 +325,10 @@ public class MonopolyController {
     void payRentAction(Player player, Field field) {
         if (field.getOwner() != null && field.getOwner().getId() != player.getId()) {
             int rentAmount = field.getRentPrice();
-            System.out.println("PLAYER THAT PAYS RENT: " + player.getWallet());
-            System.out.println("PLAYER WHO OWNS FIELD: " + field.getOwner().getWallet());
-
             player.payRent(player.getId() == player1.getId() ? player2 : player1, rentAmount);
             fillPlayerInfo(player);
             fillInfoLog(player.getName() + " paid " + rentAmount + "€ rent to " + field.getOwner().getName() + ".");
-
-            System.out.println("AFTER PAYING RENt -----------------------------");
-            System.out.println("PLAYER THAT PAYS RENT: " + player.getWallet());
-            System.out.println("PLAYER WHI OWNS FIELD: " + field.getOwner().getWallet());
         }
-    }
-
-    public static void deactivateButtons(boolean state) {
-        buttonDisable = state;
     }
 
     public static void managePlayerLabel(Player player, Boolean state) {
@@ -433,6 +418,34 @@ public class MonopolyController {
             }
         };
         thread.start();
+
+        if (Monopoly.playerTurn.name().equals(PlayerTurn.PLAYER_ONE.name())) {
+            if(player1.getWallet() == 0){
+                DialogUtils.showWinnerDialog(player2);
+            }
+        } else {
+            if(player2.getWallet() == 0){
+                DialogUtils.showWinnerDialog(player1);
+            }
+        }
+    }
+
+    @FXML
+    void goBankrupt(ActionEvent event) {
+        if (Monopoly.playerTurn.name().equals(PlayerTurn.PLAYER_ONE.name())) {
+            player1.setWallet(0);
+            fillInfoLog("Player " + player1.getName() + " went bankrupt!");
+            DialogUtils.showWinnerDialog(player2);
+        } else {
+            player2.setWallet(0);
+            fillInfoLog("Player " + player2.getName() + " went bankrupt!");
+            DialogUtils.showWinnerDialog(player1);
+        }
+        nextButton.setDisable(true);
+        payRentButton.setDisable(true);
+        buyButton.setDisable(true);
+        rollButton.setDisable(true);
+        bankruptButton.setDisable(true);
     }
 
     @FXML
@@ -464,8 +477,7 @@ public class MonopolyController {
     }
 
     private static void playerOneSendRequest(GameState gameState) {
-        try (Socket clientSocket = new Socket(Monopoly.HOST, Monopoly.PLAYER_TWO_SERVER_PORT)
-        ) {
+        try (Socket clientSocket = new Socket(Monopoly.HOST, Monopoly.PLAYER_TWO_SERVER_PORT)) {
             System.err.println("Client is connecting to " + clientSocket.getInetAddress() + ":" + clientSocket.getPort());
 
             sendSerializableRequestToPlayerTwo(clientSocket, gameState);
@@ -494,9 +506,6 @@ public class MonopolyController {
             player1.setWallet(gameState.getPlayerOne().getWallet());
             player2.setWallet(gameState.getPlayerTwo().getWallet());
         });
-        System.out.println("PLAYER ONE WALLET: " + gameState.getPlayerOne().getWallet());
-        System.out.println("PLAYER TWO WALLET: " + gameState.getPlayerTwo().getWallet());
-        System.out.println("Game state sent to Player two! \n" + gameState.toString());
     }
 
     private static void sendSerializableRequestToPlayerOne(Socket client, GameState gameState) throws IOException, ClassNotFoundException {
@@ -507,14 +516,10 @@ public class MonopolyController {
             player1.setWallet(gameState.getPlayerOne().getWallet());
             player2.setWallet(gameState.getPlayerTwo().getWallet());
         });
-        System.out.println("PLAYER ONE WALLET: " + gameState.getPlayerOne().getWallet());
-        System.out.println("PLAYER TWO WALLET: " + gameState.getPlayerTwo().getWallet());
-        System.out.println("Game state sent to Player one! \n" + gameState.toString());
     }
 
     public void generateHtmlDocumentation() {
         DocumentationUtils.generateDocumentation();
-        System.out.println("DocumentationUtils");
     }
 
 }

@@ -17,7 +17,6 @@ public class DocumentationUtils {
 
         String path = "C:/Users/zeljk/Desktop/patrik_faks/java_aplikacije/monopoly/src/main/java";
 
-
         try {
             List<Path> classNameList =  Files.walk(Paths.get(path))
                     .filter(p -> p.getFileName().toString().endsWith(".java"))
@@ -50,10 +49,6 @@ public class DocumentationUtils {
                             + field.getName()
                             + "</h3>\n");
                 }
-
-                //Constructor[] classConstructors = documentationClass.getConstructors();
-
-                //classConstructors[0].get
             }
 
         } catch (IOException | ClassNotFoundException e) {

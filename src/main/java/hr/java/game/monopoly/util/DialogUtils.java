@@ -6,17 +6,9 @@ public class DialogUtils {
 
     public static void showWinnerDialog(Player winner) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("The winner");
+        alert.setTitle("Game Over");
         alert.setHeaderText(null);
         alert.setContentText("The winner is: " + winner.getName());
-        alert.showAndWait();
-    }
-
-    public static void showDrawDialog() {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("It's a draw");
-        alert.setHeaderText(null);
-        alert.setContentText("There is no winner!");
         alert.showAndWait();
     }
 

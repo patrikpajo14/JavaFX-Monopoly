@@ -25,13 +25,11 @@ public class Player implements Serializable {
     public void buyField(int withdrawAmount, Field field) {
         if(withdrawAmount > this.wallet) {
             this.wallet = 0;
-//            System.out.println("Player "+ this.id + " went bankrupt!");
         } else {
             if(this.fieldsOwns.isEmpty()){
                 this.fieldsOwns.add(field);
             }else{
                 for (Field ownedField : fieldsOwns) {
-                    System.out.println("Owned field "+ ownedField.getTitle());
                     if (ownedField.getId() != field.getId()) {
                         this.fieldsOwns.add(field);
                         break;
@@ -44,19 +42,9 @@ public class Player implements Serializable {
         }
     }
 
-    /*public void payRent(int withdrawAmount) {
-        if(withdrawAmount > this.wallet) {
-            this.wallet = 0;
-            System.out.println("Player "+ this.id + " went bankrupt!");
-        } else {
-            this.wallet -= withdrawAmount;
-        }
-    }*/
-
     public void payRent(Player owner, int rentAmount) {
         if (rentAmount > this.wallet) {
             this.wallet = 0;
-            System.out.println("Player " + this.id + " went bankrupt!");
         } else {
             this.wallet -= rentAmount;
         }

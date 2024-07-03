@@ -386,6 +386,11 @@
                   <TextArea fx:id="infoLogTextArea" layoutX="52.0" layoutY="260.0" prefHeight="72.0" prefWidth="232.0" wrapText="true" />
                   <TextArea fx:id="playerInfoTextArea" layoutX="51.0" layoutY="89.0" prefHeight="155.0" prefWidth="232.0" wrapText="true" />
                   <Label fx:id="lastGameMoveLabel" layoutX="51.0" layoutY="345.0" prefHeight="18.0" prefWidth="232.0" />
+                  <Button fx:id="bankruptButton" layoutX="52.0" layoutY="552.0" mnemonicParsing="false" onAction="#goBankrupt" prefHeight="25.0" prefWidth="232.0" style="-fx-background-color: #e61f23; -fx-text-fill: #ffffff;" text="Go Bankrupt" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Button>
                </children>
             </AnchorPane>
             <MenuBar prefHeight="25.0" prefWidth="712.0" GridPane.columnSpan="7" GridPane.valignment="TOP">

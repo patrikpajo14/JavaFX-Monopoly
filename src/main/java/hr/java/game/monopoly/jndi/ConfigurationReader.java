@@ -16,7 +16,6 @@ public class ConfigurationReader {
     private static Hashtable<?, ?> configureEnvironment() {
         return new Hashtable<>() {
             {
-                //put(Context.INITIAL_CONTEXT_FACTORY, INITIAL_CONTEXT_FACTORY);
                 put(Context.INITIAL_CONTEXT_FACTORY,"com.sun.jndi.fscontext.RefFSContextFactory");
                 put(Context.PROVIDER_URL, PROVIDER_URL);
             }

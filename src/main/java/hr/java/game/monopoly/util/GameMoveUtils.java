@@ -24,9 +24,6 @@ public class GameMoveUtils {
     }
 
     public static GameMove getLastGameMove() {
-
-        //List<GameMove> gameMoves;
-
         try (ObjectInputStream ois = new ObjectInputStream(
                 new FileInputStream(GAME_MOVE_HISTORY_FILE_NAME)))
         {
